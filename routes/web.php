@@ -18,3 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+// 認証後のページ
+Route::get('/authenticate', 'Auth\AuthenticateController@index');
+
+// 認証処理を行う
+Route::post('/authenticate', 'Auth\AuthenticateController@auth');
+
+// 認証用のフォームを表示
+Route::get('/authenticate/signin', 'Auth\AuthenticateController@showSignIn');
