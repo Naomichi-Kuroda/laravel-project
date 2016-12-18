@@ -23,3 +23,6 @@ Route::post('/authenticate', 'Auth\AuthenticateController@auth');
 // ログインユーザー取得
 Route::get('/authenticate', 'Auth\AuthenticateController@index');
 
+// ユーザー
+Route::resource('user', 'UserController');
+
