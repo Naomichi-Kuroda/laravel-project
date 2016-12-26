@@ -17,7 +17,7 @@ class AuthenticateController extends Controller
      * constructor
      */
     public function __construct(){
-        $this->middleware('jwt.auth', ['except' => ['showSignIn', 'auth']]);
+        $this->middleware('jwt.auth', ['except' => 'auth']);
     }
 
     /**
