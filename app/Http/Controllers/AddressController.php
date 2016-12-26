@@ -47,10 +47,23 @@ class AddressController extends Controller
     {
         $keyword = \Request::get('keyword');
 
-        $data = Address::where('zipcode', $keyword)
+        $data = Address::where('zip_code', $keyword)
             ->first();
 
-        return response()->json(['result' => $data]);
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+                'result' => [
+                    'zipCode' => $data->zip_code,
+                    'prefecture' => $data->prefecture,
+                    'city' => $data->city,
+                    'town' => $data->town,
+                ]
+            ]
+        );
     }
 
 }

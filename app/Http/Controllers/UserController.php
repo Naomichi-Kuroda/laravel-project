@@ -21,14 +21,28 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User;
-        $user->lastName = $request->input('lastName');
-        $user->firstName = $request->input('firstName');
+        $user->last_name = $request->input('lastName');
+        $user->first_name = $request->input('firstName');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
-        $user->userType = 'customer';
+        $user->user_type = 'customer';
         $user->save();
 
-        return response()->json(compact('user'));
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+                'result' => [
+                    'lastName' => $user->last_lame,
+                    'firstName' => $user->first_lame,
+                    'email' => $user->email,
+                    'password' => $user->password,
+                    'userType' => $user->user_type,
+                ]
+            ]
+        );
     }
 
     public function show($id)

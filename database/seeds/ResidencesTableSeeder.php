@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Address;
+use App\Residence;
 
-class AddressesTableSeeder extends Seeder
+class ResidencesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,12 +13,13 @@ class AddressesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('addresses')->delete();
+        DB::table('residences')->delete();
 
         $faker = Faker::create('ja_JP');
 
-        for($i = 0; $i < 1000; $i++) {
-            Address::create([
+        for($i = 0; $i < 50; $i++) {
+            Residence::create([
+                'name' => $faker->country,
                 'zip_code' => $faker->postcode,
                 'prefecture' => $faker->prefecture,
                 'city' => $faker->city,
