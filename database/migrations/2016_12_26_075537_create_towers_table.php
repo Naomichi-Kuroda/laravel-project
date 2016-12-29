@@ -15,8 +15,9 @@ class CreateTowersTable extends Migration
     {
         Schema::create('towers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('residence_id')->unsigned();
+            $table->string('name');
+            $table->string('memo');
             $table->timestamps();
 
             $table->foreign('residence_id')

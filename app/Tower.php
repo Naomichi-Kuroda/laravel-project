@@ -9,7 +9,7 @@ class Tower extends Model
     protected $table = 'towers';
 
     protected $fillable = [
-        'name'
+        'name', 'memo'
     ];
 
     public function residence()

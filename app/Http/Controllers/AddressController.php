@@ -2,50 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Address;
+use Illuminate\Support\Facades\Request;
 
 class AddressController extends Controller
 {
-
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store()
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update($id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
-
     public function search()
     {
-        $keyword = \Request::get('keyword');
+        $keyword = Request::get('keyword');
 
         $data = Address::where('zip_code', $keyword)
             ->first();
@@ -65,5 +29,4 @@ class AddressController extends Controller
             ]
         );
     }
-
 }

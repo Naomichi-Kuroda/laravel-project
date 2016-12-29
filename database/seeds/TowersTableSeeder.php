@@ -23,6 +23,7 @@ class TowersTableSeeder extends Seeder
             for($i = 0; $i < 3; $i++) {
                 $tower = new Tower([
                     'name' => $faker->company,
+                    'memo' => $faker->text,
                 ]);
                 $residence->towers()->save($tower);
             }
