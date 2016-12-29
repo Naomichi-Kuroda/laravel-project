@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Residence;
 use App\Tower;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TowerController extends Controller
 {
@@ -11,8 +13,8 @@ class TowerController extends Controller
     {
         $towers = Tower::all();
 
-        $page = Request::get('page', 1);
-        $perPage = Request::get('limit', 30);
+        $page = \Request::get('page', 1);
+        $perPage = \Request::get('limit', 30);
         $offSet = ($page * $perPage) - $perPage;
 
         foreach ($towers as $tower) {
@@ -83,13 +85,60 @@ class TowerController extends Controller
         //
     }
 
-    public function update($id)
+    public function update($towerId, Request $request)
     {
-        //
+        $rules = [
+            'residenceName' => 'required',
+            'towerName' => 'required',
+            'address' => [
+                'zipCode' => 'required',
+                'prefecture' => 'required',
+                'city' => 'required',
+                'town' => 'required',
+            ],
+            'memo' => 'required',
+        ];
+        $validator = Validator::make(\Request::all(), $rules);
+
+        if ($validator->fails()) {
+//            return Redirect::to('nerds/' . $id . '/edit')
+//                ->withErrors($validator)
+//                ->withInput(Input::except('password'));
+        } else {
+            $tower = Tower::find($towerId);
+            $tower->residence->name = $request->input('residenceName');
+            $tower->name = $request->input('towerName');
+            $tower->residence->zip_code = $request->input('address.zipCode');
+            $tower->residence->prefecture = $request->input('address.prefecture');
+            $tower->residence->city = $request->input('address.city');
+            $tower->residence->town = $request->input('address.town');
+            $tower->memo = $request->input('memo');
+            $tower->save();
+            $tower->residence->save();
+
+            return response()->json(
+                [
+                    'status' => [
+                        'code' => 200,
+                        'message' => 'API SUCCESS'
+                    ],
+                ]
+            );
+        }
     }
 
-    public function destroy($id)
+    public function destroy($towerId)
     {
-        //
+        $tower = Tower::find($towerId);
+        $tower->delete();
+
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+            ]
+        );
     }
 }

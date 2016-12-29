@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Address;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
     public function search()
     {
-        $keyword = Request::get('keyword');
+        $keyword = \Request::get('keyword', '');
 
         $data = Address::where('zip_code', $keyword)
             ->first();
