@@ -29,6 +29,9 @@ Route::get('/address', 'AddressController@search');
 // ユーザー
 Route::resource('user', 'UserController');
 
-// タワー
+// 建物
+Route::resource('residence', 'ResidenceController');
+
+// 棟
 Route::resource('tower', 'TowerController');
 

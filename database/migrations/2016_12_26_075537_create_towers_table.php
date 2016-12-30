@@ -17,7 +17,7 @@ class CreateTowersTable extends Migration
             $table->increments('id');
             $table->integer('residence_id')->unsigned();
             $table->string('name');
-            $table->string('memo');
+            $table->string('memo')->nullable();
             $table->timestamps();
 
             $table->foreign('residence_id')
