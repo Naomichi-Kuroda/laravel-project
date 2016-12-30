@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Residence;
 use App\Tower;
+use App\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -141,4 +142,39 @@ class TowerController extends Controller
             ]
         );
     }
+
+    public function storeRooms($towerId, Request $request)
+    {
+        $rules = array(
+            'roomList' => [
+                'roomName' =>  'required',
+            ]
+        );
+        $validator = Validator::make(\Request::all(), $rules);
+
+        if ($validator->fails()) {
+//            return Redirect::to('nerds/create')
+//                ->withErrors($validator)
+//                ->withInput(Input::except('password'));
+        } else {
+            $tower = Tower::find($towerId);
+            foreach ($request->input('roomList') as $newRoom) {
+                $room = new Room();
+                $room->name = $newRoom['roomName'];
+                $tower->rooms()->save($room);
+            }
+
+            return response()->json(
+                [
+                    'status' => [
+                        'code' => 200,
+                        'message' => 'API SUCCESS'
+                    ],
+                    'result' => $tower
+                ]
+            );
+        }
+
+    }
 }
+

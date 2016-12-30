@@ -34,4 +34,7 @@ Route::resource('residence', 'ResidenceController');
 
 // 棟
 Route::resource('tower', 'TowerController');
+Route::put('/tower/storeRooms/{towerId}', 'TowerController@storeRooms');
+
+
 
