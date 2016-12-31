@@ -186,7 +186,7 @@ class TowerController extends Controller
     {
         $rules = array(
             'roomList' => [
-                'roomName' =>  'required',
+                'roomName' => 'required',
             ]
         );
         $validator = Validator::make(\Request::all(), $rules);
@@ -209,11 +209,9 @@ class TowerController extends Controller
                         'code' => 200,
                         'message' => 'API SUCCESS'
                     ],
-                    'result' => $tower
                 ]
             );
         }
-
     }
 }
 

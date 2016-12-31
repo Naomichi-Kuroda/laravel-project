@@ -15,8 +15,13 @@ class CreateResidentsTable extends Migration
     {
         Schema::create('residents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('room_id')->unsigned();
+            $table->string('name');
+            $table->string('phone_number');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->dateTime('limit_date');
+            $table->string('memo');
             $table->timestamps();
 
             $table->foreign('room_id')

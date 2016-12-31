@@ -9,7 +9,7 @@ class Resident extends Model
     protected $table = 'residents';
 
     protected $fillable = [
-        'name'
+        'name', 'phone_number', 'start_date', 'end_date', 'limit_date', 'memo',
     ];
 
     public function room()

@@ -23,6 +23,11 @@ class ResidentsTableSeeder extends Seeder
             for($i = 0; $i < 2; $i++) {
                 $resident = new Resident([
                     'name' => $faker->name,
+                    'phone_number' => $faker->phoneNumber,
+                    'start_date' => $faker->dateTime,
+                    'end_date' => $faker->dateTime,
+                    'limit_date' => $faker->dateTime,
+                    'memo' => $faker->text,
                 ]);
                 $room->residents()->save($resident);
             }
