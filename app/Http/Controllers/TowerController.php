@@ -44,6 +44,45 @@ class TowerController extends Controller
         );
     }
 
+    public function indexRooms($towerId)
+    {
+        $rooms = Tower::find($towerId)->rooms;
+
+        $page = \Request::get('page', 1);
+        $perPage = \Request::get('limit', 30);
+        $offSet = ($page * $perPage) - $perPage;
+
+        foreach ($rooms as $room) {
+            if(!is_null($room->residents()->first())) {
+                $data[] = [
+                    'roomId' => $room->id,
+                    'roomName' => $room->name,
+                    'residentName' => $room->residents()->first()->name,
+                ];
+            } else {
+                $data[] = [
+                    'roomId' => $room->id,
+                    'roomName' => $room->name,
+                    'residentName' => '',
+                ];
+            }
+        }
+
+        $data = array_slice($data, $offSet, $perPage, true);
+
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+                'result' => [
+                    'roomList' => $data
+                ]
+            ]
+        );
+    }
+
     public function create()
     {
         //
