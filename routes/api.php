@@ -37,7 +37,9 @@ Route::resource('tower', 'TowerController');
 Route::get('/tower/indexRooms/{towerId}', 'TowerController@indexRooms');
 Route::put('/tower/storeRooms/{towerId}', 'TowerController@storeRooms');
 
+// 部屋
 Route::resource('room', 'RoomController');
+Route::get('/room/indexResidents/{roomId}', 'RoomController@indexResidents');
 Route::put('/room/storeResident/{roomId}', 'RoomController@storeResident');
 
 

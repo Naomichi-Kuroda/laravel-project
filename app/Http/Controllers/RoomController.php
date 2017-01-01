@@ -9,6 +9,41 @@ use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
+    public function indexResidents($roomId)
+    {
+        $residents = Room::find($roomId)->residents;
+
+        $page = \Request::get('page', 1);
+        $perPage = \Request::get('limit', 30);
+        $offSet = ($page * $perPage) - $perPage;
+
+        foreach ($residents as $resident) {
+            $data[] = [
+                'residentId' => $resident->id,
+                'residentName' => $resident->name,
+                'phoneNumber' => $resident->phone_number,
+                'startDate' => $resident->start_date,
+                'endDate' => $resident->end_date,
+                'limitDate' => $resident->limit_date,
+                'memo' => $resident->memo,
+            ];
+        }
+
+        $data = array_slice($data, $offSet, $perPage, true);
+
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+                'result' => [
+                    'residentList' => $data
+                ]
+            ]
+        );
+    }
+
     public function storeResident($roomId, Request $request)
     {
         $rules = array(
@@ -43,7 +78,6 @@ class RoomController extends Controller
                         'code' => 200,
                         'message' => 'API SUCCESS'
                     ],
-                    'result' => $room
                 ]
             );
         }
