@@ -9,7 +9,7 @@ class Room extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
-        'name'
+        'name', 'leave_apply_span', 'contract_span', 'manage_code', 'memo'
     ];
 
     public function tower()

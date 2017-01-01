@@ -17,6 +17,10 @@ class CreateRoomsTable extends Migration
             $table->increments('id');
             $table->integer('tower_id')->unsigned();
             $table->string('name');
+            $table->string('leave_apply_span')->nullable();
+            $table->string('contract_span')->nullable();
+            $table->string('manage_code')->nullable();
+            $table->string('memo')->nullable();
             $table->timestamps();
 
             $table->foreign('tower_id')

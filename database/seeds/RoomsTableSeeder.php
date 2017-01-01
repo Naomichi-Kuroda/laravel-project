@@ -23,6 +23,10 @@ class RoomsTableSeeder extends Seeder
             for($i = 0; $i < 10; $i++) {
                 $room = new Room([
                     'name' => $faker->buildingNumber,
+                    'leave_apply_span' => $faker->randomDigit,
+                    'contract_span' => $faker->randomDigit,
+                    'manage_code' => $faker->sentence,
+                    'memo' => $faker->text,
                 ]);
                 $tower->rooms()->save($room);
             }
