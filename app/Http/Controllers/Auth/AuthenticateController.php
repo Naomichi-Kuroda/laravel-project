@@ -26,9 +26,22 @@ class AuthenticateController extends Controller
      */
     public function index()
     {
-        // ログイン中のユーザー取得
         $loginUser = JWTAuth::parseToken()->toUser();
-        return response()->json(['user' => $loginUser]);
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+                'result' => [
+                    'userId' => $loginUser->id,
+                    'lastName' => $loginUser->last_name,
+                    'firstName' => $loginUser->first_name,
+                    'email' => $loginUser->email,
+                    'phoneNumber' => $loginUser->phone_number,
+                ]
+            ]
+        );
     }
 
     /**

@@ -28,6 +28,7 @@ Route::get('/address', 'AddressController@search');
 
 // ユーザー
 Route::resource('user', 'UserController');
+Route::put('/user/updatePassword/{userId}', 'UserController@updatePassword');
 
 // 建物
 Route::resource('residence', 'ResidenceController');
