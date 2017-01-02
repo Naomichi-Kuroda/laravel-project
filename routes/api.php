@@ -46,4 +46,6 @@ Route::put('/room/storeResident/{roomId}', 'RoomController@storeResident');
 // 居住者
 Route::resource('resident', 'ResidentController');
 
+// 会社
+Route::resource('company', 'CompanyController');
 
