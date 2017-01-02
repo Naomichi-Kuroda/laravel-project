@@ -42,4 +42,45 @@ class CompanyController extends Controller
             ]
         );
     }
+
+    public function store(Request $request)
+    {
+        $rules = array(
+            'companyName' => 'required',
+            'address' => [
+                'zipCode' => 'required',
+                'prefecture' => 'required',
+                'city' => 'required',
+                'town' => 'required',
+            ],
+            'phoneNumber' => 'required',
+            'memo' => 'required',
+        );
+        $validator = Validator::make(\Request::all(), $rules);
+
+        if ($validator->fails()) {
+//            return Redirect::to('nerds/create')
+//                ->withErrors($validator)
+//                ->withInput(Input::except('password'));
+        } else {
+            $company = new Company();
+            $company->name = $request->input('companyName');
+            $company->zip_code = $request->input('address.zipCode');
+            $company->prefecture = $request->input('address.prefecture');
+            $company->city = $request->input('address.city');
+            $company->town = $request->input('address.town');
+            $company->phone_number = $request->input('phoneNumber');
+            $company->memo = $request->input('memo');
+            $company->save();
+
+            return response()->json(
+                [
+                    'status' => [
+                        'code' => 200,
+                        'message' => 'API SUCCESS'
+                    ],
+                ]
+            );
+        }
+    }
 }
