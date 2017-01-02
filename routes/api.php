@@ -48,4 +48,5 @@ Route::resource('resident', 'ResidentController');
 
 // 会社
 Route::resource('company', 'CompanyController');
+Route::put('/company/storeUsers/{companyId}', 'CompanyController@storeUsers');
 

@@ -12,8 +12,8 @@ class Company extends Model
         'name', 'zip_code', 'prefecture', 'city', 'town', 'phone_number', 'memo'
     ];
 
-    public function towers()
+    public function users()
     {
-        return $this->hasMany('App\Tower');
+        return $this->hasMany('App\User');
     }
 }

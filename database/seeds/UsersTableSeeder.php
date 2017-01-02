@@ -25,16 +25,5 @@ class UsersTableSeeder extends Seeder
             'phone_number' => '08023770943',
             'user_type' => 'customer',
         ]);
-
-        for($i = 0; $i < 3; $i++) {
-            User::create([
-                'last_name' => $faker->lastName,
-                'first_name' => $faker->firstName,
-                'email' => $faker->safeEmail,
-                'password' => bcrypt('nkuroda'),
-                'phone_number' => $faker->phoneNumber,
-                'user_type' => 'customer',
-            ]);
-        }
     }
 }

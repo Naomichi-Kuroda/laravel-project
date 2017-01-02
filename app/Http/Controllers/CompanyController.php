@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -72,6 +73,45 @@ class CompanyController extends Controller
             $company->phone_number = $request->input('phoneNumber');
             $company->memo = $request->input('memo');
             $company->save();
+            return response()->json(
+                [
+                    'status' => [
+                        'code' => 200,
+                        'message' => 'API SUCCESS'
+                    ],
+                    'result' => [
+                        'companyId' => $company->id,
+                    ]
+                ]
+            );
+        }
+    }
+
+    public function storeUsers($companyId, Request $request)
+    {
+        $rules = array(
+            'userList' => [
+                'lastName' => 'required',
+                'firstName' => 'required',
+                'email' => 'required',
+            ]
+        );
+        $validator = Validator::make(\Request::all(), $rules);
+
+        if ($validator->fails()) {
+//            return Redirect::to('nerds/create')
+//                ->withErrors($validator)
+//                ->withInput(Input::except('password'));
+        } else {
+            $company = Company::find($companyId);
+            foreach ($request->input('userList') as $newUser) {
+                $user = new User();
+                $user->last_name = $newUser['lastName'];
+                $user->first_name = $newUser['firstName'];
+                $user->email = $newUser['email'];
+                $user->user_type = 'client';
+                $company->users()->save($user);
+            }
 
             return response()->json(
                 [
