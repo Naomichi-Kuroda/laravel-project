@@ -23,7 +23,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'nkuroda@gmail.com',
             'password' => bcrypt('nkuroda'),
             'phone_number' => '08023770943',
-            'user_type' => 'customer',
+            'category' => 'customer',
+            'status' => 2,
         ]);
     }
 }

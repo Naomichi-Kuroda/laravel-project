@@ -27,7 +27,8 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->phone_number = $request->input('phoneNumber');
-        $user->user_type = 'customer';
+        $user->category = 'customer';
+        $user->status = 1;
         $user->save();
 
         return response()->json(
