@@ -28,6 +28,9 @@ Route::get('/address', 'AddressController@search');
 
 // ユーザー
 Route::resource('user', 'UserController');
+Route::get('/user/sendmail/{userId}', 'UserController@sendConfirmationMail');
+Route::get('/user/confirm/{userId}', 'UserController@confirmAccount');
+Route::put('/user/storeClient/{userId}', 'UserController@storeClient');
 Route::put('/user/updatePassword/{userId}', 'UserController@updatePassword');
 
 // 建物
