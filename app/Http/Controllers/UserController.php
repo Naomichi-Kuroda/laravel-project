@@ -93,10 +93,6 @@ class UserController extends Controller
                     'result' => $validator->errors()
                 ], 301
             );
-
-//            return Redirect::to('nerds/' . $id . '/edit')
-//                ->withErrors($validator)
-//                ->withInput(Input::except('password'));
         } else {
             $user = new User;
             $user->last_name = $request->input('lastName');
