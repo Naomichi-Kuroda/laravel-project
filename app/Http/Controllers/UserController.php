@@ -10,9 +10,37 @@ use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
 
-    public function index()
+    public function indexClients()
     {
-        //
+        $users = User::where('category', 'client')->get();
+
+        $page = \Request::get('page', 1);
+        $perPage = \Request::get('limit', 30);
+        $offSet = ($page * $perPage) - $perPage;
+
+        foreach ($users as $user) {
+            $data[] = [
+                'userId' => $user->id,
+                'lastName' => $user->last_name,
+                'firstName' => $user->first_name,
+                'roleName' => $user->role->name,
+                'status' => $user->status,
+            ];
+        }
+
+        $data = array_slice($data, $offSet, $perPage, true);
+
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+                'result' => [
+                    'userList' => $data
+                ]
+            ]
+        );
     }
 
     public function show($userId)

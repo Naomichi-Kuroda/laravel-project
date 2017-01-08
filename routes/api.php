@@ -27,6 +27,7 @@ Route::get('/authenticate', 'Auth\AuthenticateController@index');
 Route::get('/address', 'AddressController@search');
 
 // ユーザー
+Route::get('/user/indexClients', 'UserController@indexClients');
 Route::resource('user', 'UserController');
 Route::get('/user/sendmail/{userId}', 'UserController@sendConfirmationMail');
 Route::get('/user/confirm/{userId}', 'UserController@confirmAccount');
