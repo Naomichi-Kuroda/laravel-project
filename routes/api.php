@@ -55,3 +55,6 @@ Route::resource('company', 'CompanyController');
 Route::get('/company/indexUsers/{companyId}', 'CompanyController@indexUsers');
 Route::put('/company/storeUsers/{companyId}', 'CompanyController@storeUsers');
 
+// 居住者
+Route::resource('role', 'RoleController');
+

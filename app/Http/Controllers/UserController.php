@@ -49,9 +49,14 @@ class UserController extends Controller
 
         $data = [
             'userId' => $user->id,
+            'roleId' => $user->role_id,
             'lastName' => $user->last_name,
             'firstName' => $user->first_name,
             'email' => $user->email,
+            'phoneNumber' => $user->phone_number,
+            'registDate' => $user->created_at->format('Y年m月d日'),
+            'status' => $user->status,
+            'memo' => $user->memo,
         ];
 
         return response()->json(
@@ -169,7 +174,7 @@ class UserController extends Controller
 
     public function update($userId, Request $request)
     {
-        $rules = [
+       $rules = [
             'lastName' => 'required',
             'firstName' => 'required',
             'email' => 'required',
@@ -183,10 +188,12 @@ class UserController extends Controller
 //                ->withInput(Input::except('password'));
         } else {
             $user = User::find($userId);
+            $user->role_id = $request->input('roleId');
             $user->last_name = $request->input('lastName');
             $user->first_name = $request->input('firstName');
             $user->email = $request->input('email');
             $user->phone_number = $request->input('phoneNumber');
+            $user->memo = $request->input('memo');
             $user->save();
 
             return response()->json(
@@ -229,9 +236,19 @@ class UserController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy($userId)
     {
-        //
+        $user = User::find($userId);
+        $user->delete();
+
+        return response()->json(
+            [
+                'status' => [
+                    'code' => 200,
+                    'message' => 'API SUCCESS'
+                ],
+            ]
+        );
     }
 
 }

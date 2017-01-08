@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'customer@localhost.com',
             'password' => bcrypt('nkuroda'),
             'phone_number' => '08023770943',
+            'memo' => $faker->text,
             'category' => 'customer',
             'status' => 3,
         ]);
@@ -35,6 +36,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'client@localhost.com',
             'password' => bcrypt('nkuroda'),
             'phone_number' => '08023770943',
+            'memo' => $faker->text,
             'category' => 'client',
             'status' => 3,
         ]);
@@ -46,6 +48,7 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->safeEmail,
                 'password' => $faker->password,
                 'phone_number' => $faker->phoneNumber,
+                'memo' => $faker->text,
                 'category' => 'customer',
                 'status' => $faker->numberBetween($min = 1, $max = 3),
             ]);
@@ -60,6 +63,7 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->safeEmail,
                 'password' => $faker->password,
                 'phone_number' => $faker->phoneNumber,
+                'memo' => $faker->text,
                 'category' => 'client',
                 'status' => $faker->numberBetween($min = 1, $max = 3),
             ]);
