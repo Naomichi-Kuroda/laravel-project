@@ -72,7 +72,9 @@ class AuthenticateController extends Controller
                     'code' => 200,
                     'message' => 'API SUCCESS'
                 ],
-                'result' => $token
+                'result' => [
+                    'token' => $token
+                ]
             ], 200
         );
     }

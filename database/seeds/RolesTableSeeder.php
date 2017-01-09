@@ -22,9 +22,16 @@ class RolesTableSeeder extends Seeder
                 'name' => $faker->colorName,
                 'manage' => json_encode(
                     [
-                        'manage' => 'all',
-                        'content' => 'all',
-                        'residence' => 'all',
+                        1
+                    ]
+                ),
+                'content' => json_encode(
+                    [
+                        1,2
+                    ]
+                ),
+                'residence' => json_encode(
+                    [
                     ]
                 ),
                 'memo' => $faker->text,

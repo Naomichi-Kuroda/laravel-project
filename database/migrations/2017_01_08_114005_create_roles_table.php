@@ -17,6 +17,8 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->json('manage')->nullable();
+            $table->json('content')->nullable();
+            $table->json('residence')->nullable();
             $table->string('memo');
             $table->rememberToken();
             $table->timestamps();
